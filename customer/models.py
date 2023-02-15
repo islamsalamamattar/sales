@@ -29,7 +29,7 @@ class Customer(models.Model):
 
 class Discount(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='invoices')
-    product = = models.ForeignKey(pmodels.Product, null=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(pmodels.Product, null=True, on_delete=models.CASCADE)
     discount = models.PositiveIntegerField(max=100)
     valid_till = models.DateField(auto_now=False, auto_now_add=False, )
     def __str__(self):
