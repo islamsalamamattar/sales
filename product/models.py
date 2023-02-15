@@ -13,7 +13,7 @@ class Brand(models.Model):
         return f"{self.name}"
 
 class Product(models.Model):
-    brand = = models.ForeignKey(Brand, null=True, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=25)
     name_ar = models.CharField(max_length=64)
     price = models.DecimalField(max_digits=10, decimal_places=2)
