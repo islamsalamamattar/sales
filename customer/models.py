@@ -36,12 +36,14 @@ class Discount(models.Model):
         return f"{self.name}"
 
 class Invoice(models.Model):
+    number = models.PositiveIntegerField()
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='invoices')
-    timestamp = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
 
 class InvoiceItem(models.Model):
     invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, related_name='invoice_items')
     product = models.ForeignKey(pmodels.Product, on_delete=models.CASCADE, related_name='invoice_items')
     quantity = models.PositiveIntegerField()
-
+    discount = models.ForeignKey(Discount, null=True, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
