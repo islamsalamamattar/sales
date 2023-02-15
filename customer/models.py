@@ -1,5 +1,5 @@
 from django.db import models
-from product import models as pmodels
+from product.models import *
 
 
 # Cities > Areas Settings
