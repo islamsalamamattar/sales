@@ -28,7 +28,7 @@ class Customer(models.Model):
         return f"{self.name}"
 
 class Discount(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='invoices')
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
     discount = models.PositiveIntegerField()
     valid_till = models.DateField(auto_now=False, auto_now_add=False, )
@@ -37,7 +37,7 @@ class Discount(models.Model):
 
 class Invoice(models.Model):
     number = models.PositiveIntegerField()
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='invoices')
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
 
 class InvoiceItem(models.Model):
