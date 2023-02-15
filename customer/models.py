@@ -1,5 +1,5 @@
 from django.db import models
-from .product import models as pmodels
+from product import *
 
 
 # Cities > Areas Settings
@@ -29,7 +29,7 @@ class Customer(models.Model):
 
 class Discount(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='invoices')
-    product = models.ForeignKey(pmodels.Product, null=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
     discount = models.PositiveIntegerField(max=100)
     valid_till = models.DateField(auto_now=False, auto_now_add=False, )
     def __str__(self):
@@ -42,7 +42,7 @@ class Invoice(models.Model):
 
 class InvoiceItem(models.Model):
     invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, related_name='invoice_items')
-    product = models.ForeignKey(pmodels.Product, on_delete=models.CASCADE, related_name='invoice_items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='invoice_items')
     quantity = models.PositiveIntegerField()
     discount = models.ForeignKey(Discount, null=True, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
