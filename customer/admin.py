@@ -16,7 +16,7 @@ class DiscountAdmin(admin.ModelAdmin):
         list_display = ("customer", "product", "discount")
 
 class InvoiceItemInlines(admin.TabularInline):
-        model = Invoice
+        model = InvoiceItem
 class InvoiceAdmin(admin.ModelAdmin):
         list_display = ("number", "customer", "date")
         inlines = [InvoiceItemInlines]
