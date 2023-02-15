@@ -33,7 +33,7 @@ class Discount(models.Model):
     discount = models.PositiveIntegerField()
     valid_till = models.DateField(auto_now=False, auto_now_add=False, )
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.customer} - {self.product}"
 
 class Invoice(models.Model):
     number = models.PositiveIntegerField()
