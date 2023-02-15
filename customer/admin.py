@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import *
 
-# Register your models here.
 #Cities > Areas admin
 class AreaInlines(admin.TabularInline):
         model = Area
@@ -12,13 +11,13 @@ class CityAdmin(admin.ModelAdmin):
 class CustomerInlines(admin.TabularInline):
         model = Customer
 class CustomerAdmin(admin.ModelAdmin):
-        list_display = ("number", "customer", "date")
+        list_display = ("name", "area")
         inlines = [CustomerInlines]
 
 class DiscountInlines(admin.TabularInline):
         model = Discount
 class DiscountAdmin(admin.ModelAdmin):
-        list_display = ("customer", "product", "quantity", "price")
+        list_display = ("customer", "product", "discount")
         inlines = [DiscountInlines]
 
 class InvoiceInlines(admin.TabularInline):
