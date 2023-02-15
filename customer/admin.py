@@ -15,11 +15,11 @@ class CustomerAdmin(admin.ModelAdmin):
 class DiscountAdmin(admin.ModelAdmin):
         list_display = ("customer", "product", "discount")
 
-class InvoiceInlines(admin.TabularInline):
+class InvoiceItemInlines(admin.TabularInline):
         model = Invoice
-class InvoiceItemAdmin(admin.ModelAdmin):
-        list_display = ("invoce", "product", "quantity")
-        inlines = [InvoiceInlines]
+class InvoiceAdmin(admin.ModelAdmin):
+        list_display = ("invoce", "customer")
+        inlines = [InvoiceItemInlines]
 
 
 admin.site.register(City, CityAdmin)
