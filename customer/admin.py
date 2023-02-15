@@ -8,17 +8,12 @@ class CityAdmin(admin.ModelAdmin):
         list_display = ("name",)
         inlines = [AreaInlines]
 
-class CustomerInlines(admin.TabularInline):
-        model = Customer
+
 class CustomerAdmin(admin.ModelAdmin):
         list_display = ("name", "area")
-        inlines = [CustomerInlines]
 
-class DiscountInlines(admin.TabularInline):
-        model = Discount
 class DiscountAdmin(admin.ModelAdmin):
         list_display = ("customer", "product", "discount")
-        inlines = [DiscountInlines]
 
 class InvoiceInlines(admin.TabularInline):
         model = Invoice
