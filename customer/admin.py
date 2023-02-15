@@ -25,4 +25,4 @@ class InvoiceAdmin(admin.ModelAdmin):
 admin.site.register(City, CityAdmin)
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Discount, DiscountAdmin)
-admin.site.register(InvoiceItem, InvoiceItemAdmin)
+admin.site.register(Invoice, InvoiceAdmin)
