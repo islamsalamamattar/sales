@@ -23,6 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'decouple',
     'django.contrib.humanize',
+
+    'customer',
+    'product',
 ]
 
 MIDDLEWARE = [
