@@ -10,5 +10,5 @@ from .models import *
 def index(request):
     context_object_name = 'index'
     context={}
-    html_template = loader.get_template( 'frontend/index.html' )
+    html_template = loader.get_template( 'frontend/todo_index.html' )
     return HttpResponse(html_template.render(context, request))
