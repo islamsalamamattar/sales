@@ -16,8 +16,8 @@
 					</li>
 					<li class="nav-divider"></li>
 					<li class="nav-header text-white"></i>EXPENSES</li>
-					<li {% if 'Expenses' in segment %} class="active" {% endif %}><a href="{% url 'expenses' %}"><i class="ti-stats-down"></i><span>EXPENSES</span></a></li>
-					<li {% if 'Analytics' in segment %} class="active" {% endif %}><a href="{% url 'analytics' %}"><i class="ti-dashboard"></i><span>ANALYTICS</span></a></li>
+					<li {% if 'Expenses' in segment %} class="active" {% endif %}><a href="{% url 'index' %}"><i class="ti-stats-down"></i><span>EXPENSES</span></a></li>
+					<li {% if 'Analytics' in segment %} class="active" {% endif %}><a href="{% url 'index' %}"><i class="ti-dashboard"></i><span>ANALYTICS</span></a></li>
 					<li {% if 'subscriptions' in segment %} class="active" {% endif %}><a href="#"><i class="ti-receipt"></i><span>SUBSCRIPTIONS</span></a></li>
 					<li {% if 'installments' in segment %} class="active" {% endif %}><a href="#"><i class="ti-pie-chart"></i><span>INSTALLMENTS</span></a></li>
 					<li class="nav-divider"></li>
