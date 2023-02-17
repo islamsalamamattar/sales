@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'decouple',
     'django.contrib.humanize',
 
+    'authentication',
     'customer',
     'product',
 ]
