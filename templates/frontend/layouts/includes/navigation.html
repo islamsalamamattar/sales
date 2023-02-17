@@ -5,7 +5,7 @@
 			<div class="container-fluid">
 					<!-- BEGIN mobile sidebar expand / collapse button -->
 					<div class="navbar-header">
-						<a href="index.html" class="navbar-brand">
+						<a href="{% url 'index' %}" class="navbar-brand">
 							<i class="ti-panel navbar-logo text-gradient bg-theme"></i>
 							<b>Sales Portal</b> {% for segment in segment %}	{{ segment }} {% endfor %}
 						</a>
@@ -52,7 +52,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="{% url 'admin:index' %}">settings</a></li>
 								<li class="divider"></li>
-								<li><a href="{% url 'index' %}">Log Out</a></li>
+								<li><a href="{% url 'logout' %}">Log Out</a></li>
 							</ul>
 						</li>
 					</ul>
