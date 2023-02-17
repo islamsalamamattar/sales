@@ -34,7 +34,7 @@
 										<select class="form-control" name="category">
 											<option selected disabled>select product</option>
 											{% for product in product %}
-											<option value="{{ category.id }}">{{ category }}</option>
+											<option value="{{ category.id }}">{{ product.name }}</option>
 											{% endfor %}
 										</select>
 									</div>											
