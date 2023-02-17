@@ -32,8 +32,8 @@
 									<!-- BEGIN select category -->	
 									<div class="form-group col-6">
 										<select class="form-control" name="category">
-											<option selected disabled>select category</option>
-											{% for category in context.tod_cat %}
+											<option selected disabled>select product</option>
+											{% for product in product %}
 											<option value="{{ category.id }}">{{ category }}</option>
 											{% endfor %}
 										</select>
@@ -43,7 +43,7 @@
 									<div class="form-group col-6">
 
 										<button type="submit" class="btn bg-inverse col-12">
-											<div class=""><i class="ti-clipboard"></i>&nbsp; ToDo </div>
+											<div class=""><i class="ti-clipboard"></i>&nbsp; Find </div>
 										</button>
 									</div>									
 								<!-- END select category -->
