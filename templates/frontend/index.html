@@ -101,16 +101,16 @@
 					<div class="widget-reminder-header bg-inverse " style="color: white;"> All Todos</div>			
 					
 					<ul class="widget widget-list inverse-mode">
-						{% for todo in context.all_todos %}
+						{% for product in context.products %}
 						<li>
 							<div class="widget-list-container bg-theme">
 								<div class="widget-list-media icon ">
 									<i class="{{ todo.category.icon }} {{ todo.category.color }}"></i>
 								</div>
 								<div class="widget-list-content">
-									<h4 class="widget-title">{{ todo.task }}</h4>
+									<h4 class="widget-title">{{ product.brand }}</h4>
 
-									<div class="widget-desc hidden-xs">{{ todo.date_added }} - {{ todo.completed }}</div>
+									<div class="widget-desc hidden-xs">{{ product.name }} - {{ product.price }} EGP</div>
 								</div>
 								<div class="widget-list-action">
 									<div class="switcher switcher-success pull-left">
