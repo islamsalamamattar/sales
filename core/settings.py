@@ -111,7 +111,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), '/home/admin/outing/lib/python3.8/site-packages/django/contrib/admin/static']
 STATIC_ROOT = 'static_root/'
 '''
-LOGIN_URL = 'accounts/login/'
+LOGIN_URL = 'login/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
