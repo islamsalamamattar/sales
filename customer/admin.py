@@ -8,13 +8,16 @@ class CityAdmin(admin.ModelAdmin):
         list_display = ("name",)
         inlines = [AreaInlines]
 
-
+class DiscountInlines(admin.TabularInline):
+        model = Discount
 class CustomerAdmin(admin.ModelAdmin):
         list_display = ("name", "area")
+        inlines = [DiscountInlines]
 
+'''
 class DiscountAdmin(admin.ModelAdmin):
         list_display = ("customer", "product", "discount")
-
+'''
 class InvoiceItemInlines(admin.TabularInline):
         model = InvoiceItem
 class InvoiceAdmin(admin.ModelAdmin):
