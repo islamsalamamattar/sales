@@ -5,7 +5,6 @@ from django.template import loader
 from django.http import HttpResponse, JsonResponse
 from django import template
 from .models import *
-from .customer.models import *
 
 # Create your views here.
 @login_required
@@ -13,6 +12,6 @@ def index(request):
     context_object_name = 'index'
     context={}
     context['products'] = Product.objects.all()
-    context['customers'] = Customer.objects.all()
+    # context['customers'] = Customer.objects.all()
     html_template = loader.get_template( 'frontend/index.html' )
     return HttpResponse(html_template.render(context, request))
