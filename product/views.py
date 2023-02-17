@@ -7,6 +7,7 @@ from django import template
 from .models import *
 
 # Create your views here.
+@login_required
 def index(request):
     context_object_name = 'index'
     context={}
