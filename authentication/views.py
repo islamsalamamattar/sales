@@ -19,7 +19,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
-                return redirect( 'expenses' )
+                return redirect( 'index' )
             else:    
                 msg = 'Invalid Credintial'
         else:
