@@ -1,858 +1,154 @@
+{% extends 'frontend/layouts/base.html' %}	
+
+{% block title %} To Do {% endblock title %}
+{% load humanize %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Hala</title>
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %} />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-        <style>
-            /* Media Queries */
-            /* Card sizing */
-            /* Colors */
-            /* Calculations */
-            /* Placeholders */
-            @media (min-width: 1000px) {
-              #timeline .demo-card:nth-child(even) .head::after, #timeline .demo-card:nth-child(odd) .head::after {
-                position: absolute;
-                content: "";
-                width: 0;
-                height: 0;
-                border-top: 15px solid transparent;
-                border-bottom: 15px solid transparent;
-              }
-            
-              #timeline .demo-card:nth-child(even) .head::before, #timeline .demo-card:nth-child(odd) .head::before {
-                position: absolute;
-                content: "";
-                width: 9px;
-                height: 9px;
-                background-color: #bdbdbd;
-                border-radius: 9px;
-                box-shadow: 0px 0px 2px 8px #f7f7f7;
-              }
-            }
-            /* Some Cool Stuff */
-            .demo-card:nth-child(1) {
-              order: 1;
-            }
-            
-            .demo-card:nth-child(2) {
-              order: 4;
-            }
-            
-            .demo-card:nth-child(3) {
-              order: 2;
-            }
-            
-            .demo-card:nth-child(4) {
-              order: 5;
-            }
-            
-            .demo-card:nth-child(5) {
-              order: 3;
-            }
-            
-            .demo-card:nth-child(6) {
-              order: 6;
-            }
-            
-            /* Border Box */
-            * {
-              box-sizing: border-box;
-            }
-            
-            /* Fonts */
-            body {
-              font-family: Roboto;
-            }
-            
-            #timeline {
-              padding: 100px 0;
-              background: #f7f7f7;
-              border-top: 1px solid rgba(191, 191, 191, 0.4);
-              border-bottom: 1px solid rgba(191, 191, 191, 0.4);
-            }
-            #timeline h1 {
-              text-align: center;
-              font-size: 3rem;
-              font-weight: 200;
-              margin-bottom: 20px;
-            }
-            #timeline p.leader {
-              text-align: center;
-              max-width: 90%;
-              margin: auto;
-              margin-bottom: 45px;
-            }
-            #timeline .demo-card-wrapper {
-              position: relative;
-              margin: auto;
-            }
-            @media (min-width: 1000px) {
-              #timeline .demo-card-wrapper {
-                display: flex;
-                flex-flow: column wrap;
-                width: 1170px;
-                height: 1650px;
-                margin: 0 auto;
-              }
-            }
-            #timeline .demo-card-wrapper::after {
-              z-index: 1;
-              content: "";
-              position: absolute;
-              top: 0;
-              bottom: 0;
-              left: 50%;
-              border-left: 1px solid rgba(191, 191, 191, 0.4);
-            }
-            @media (min-width: 1000px) {
-              #timeline .demo-card-wrapper::after {
-                border-left: 1px solid #bdbdbd;
-              }
-            }
-            #timeline .demo-card {
-              position: relative;
-              display: block;
-              margin: 10px auto 80px;
-              max-width: 94%;
-              z-index: 2;
-            }
-            @media (min-width: 480px) {
-              #timeline .demo-card {
-                max-width: 60%;
-                box-shadow: 0px 1px 22px 4px rgba(0, 0, 0, 0.07);
-              }
-            }
-            @media (min-width: 720px) {
-              #timeline .demo-card {
-                max-width: 40%;
-              }
-            }
-            @media (min-width: 1000px) {
-              #timeline .demo-card {
-                max-width: 450px;
-                height: 400px;
-                margin: 90px;
-                margin-top: 45px;
-                margin-bottom: 45px;
-              }
-              #timeline .demo-card:nth-child(odd) {
-                margin-right: 45px;
-              }
-              #timeline .demo-card:nth-child(odd) .head::after {
-                border-left-width: 15px;
-                border-left-style: solid;
-                left: 100%;
-              }
-              #timeline .demo-card:nth-child(odd) .head::before {
-                left: 491.5px;
-              }
-              #timeline .demo-card:nth-child(even) {
-                margin-left: 45px;
-              }
-              #timeline .demo-card:nth-child(even) .head::after {
-                border-right-width: 15px;
-                border-right-style: solid;
-                right: 100%;
-              }
-              #timeline .demo-card:nth-child(even) .head::before {
-                right: 489.5px;
-              }
-              #timeline .demo-card:nth-child(2) {
-                margin-top: 180px;
-              }
-            }
-            #timeline .demo-card .head {
-              position: relative;
-              display: flex;
-              align-items: center;
-              color: #fff;
-              font-weight: 400;
-            }
-            #timeline .demo-card .head .number-box {
-              display: inline;
-              float: left;
-              margin: 15px;
-              padding: 10px;
-              font-size: 35px;
-              line-height: 35px;
-              font-weight: 600;
-              background: rgba(0, 0, 0, 0.17);
-            }
-            #timeline .demo-card .head h2 {
-              text-transform: uppercase;
-              font-size: 1.3rem;
-              font-weight: inherit;
-              letter-spacing: 2px;
-              margin: 0;
-              padding-bottom: 6px;
-              line-height: 1rem;
-            }
-            @media (min-width: 480px) {
-              #timeline .demo-card .head h2 {
-                font-size: 165%;
-                line-height: 1.2rem;
-              }
-            }
-            #timeline .demo-card .head h2 span {
-              display: block;
-              font-size: 0.6rem;
-              margin: 0;
-            }
-            @media (min-width: 480px) {
-              #timeline .demo-card .head h2 span {
-                font-size: 0.8rem;
-              }
-            }
-            #timeline .demo-card .body {
-              background: #fff;
-              border: 1px solid rgba(191, 191, 191, 0.4);
-              border-top: 0;
-              padding: 15px;
-            }
-            @media (min-width: 1000px) {
-              #timeline .demo-card .body {
-                height: 315px;
-              }
-            }
-            #timeline .demo-card .body p {
-              font-size: 14px;
-              line-height: 18px;
-              margin-bottom: 15px;
-            }
-            #timeline .demo-card .body img {
-              display: block;
-              width: 100%;
-            }
-            #timeline .demo-card--step1 {
-              background-color: #46b8e9;
-            }
-            #timeline .demo-card--step1 .head::after {
-              border-color: #46b8e9;
-            }
-            #timeline .demo-card--step2 {
-              background-color: #3ee9d1;
-            }
-            #timeline .demo-card--step2 .head::after {
-              border-color: #3ee9d1;
-            }
-            #timeline .demo-card--step3 {
-              background-color: #ce43eb;
-            }
-            #timeline .demo-card--step3 .head::after {
-              border-color: #ce43eb;
-            }
-            #timeline .demo-card--step4 {
-              background-color: #4d92eb;
-            }
-            #timeline .demo-card--step4 .head::after {
-              border-color: #4d92eb;
-            }
-            #timeline .demo-card--step5 {
-              background-color: #46b8e9;
-            }
-            #timeline .demo-card--step5 .head::after {
-              border-color: #46b8e9;
-            }
-        </style>
-        <style>
-            $primary: #3F51B5;
-            $dark-primary: #303F9F;
-            $light-primary: #C5CAE9;
-            $text: #FFFFFF;
-            $primary-text: #212121;
-            $secondary-text: #757575;
-            $accent: #FF4081;
+{% block content %}
+	<!-- BEGIN #content -->
 
-            section {
-            padding: 100px 0;
-            }
+	<!-- BEGIN row -->
+	<div class="row">	
+		<div class="col-lg-6 col-sm-12">
+			<!-- BEGIN Add_expense -->
+			<div class="row">
+				<div class="col-12">
+					
+					<div class="widget-reminder-header bg-inverse" style="color: white;">ADD TODO</div>						
+					<div class="panel panel-inverse">
+						<div class="panel-body inverse-mode bg-theme">
+							<form action="{% url 'index' %}" method="POST" name="Add_todo">
+								{% csrf_token %}
 
-            html, body {
-            overflow-x: hidden;
-            }
+								<!-- Begin note -->
+								<div class="row">
+									<div class="form-group col-12">
+										<input type="text" class="form-control" name="task" placeholder="Task ......">
+									</div>
+								</div>
+								<!-- END note -->
 
-            body {
-            font-family: 'Roboto';
-            font-size: 17px;
-            font-weight: 400;
-            background-color: #eee;
-            }
+								<!-- BEGIN row -->
+								<div class="row">
+									<!-- BEGIN select category -->	
+									<div class="form-group col-6">
+										<select class="form-control" name="category">
+											<option selected disabled>select category</option>
+											{% for category in context.tod_cat %}
+											<option value="{{ category.id }}">{{ category }}</option>
+											{% endfor %}
+										</select>
+									</div>											
+									<!-- END select category -->
+									<!-- BEGIN select store -->		
+									<div class="form-group col-6">
 
-            h1 {
-            font-size: 200%;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 400;
-            }
+										<button type="submit" class="btn bg-inverse col-12">
+											<div class=""><i class="ti-clipboard"></i>&nbsp; ToDo </div>
+										</button>
+									</div>									
+								<!-- END select category -->
+								</div>
 
-            header {
-            background: $primary;
-            color: $text;
-            padding: 150px 0;
+								{% if msg %}
+								<span class="text-danger">{{ msg }}</span>
+								{% endif %}
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END add_expenses -->
+			<!-- BEGIN not completed -->
+			<div class="row">
+				{% for category, queryset in context.not_completed.items %}
+				<div class="col-12">
+					{% if queryset.count > 0 %}
+					<div class="widget-reminder-header {{ category.color }} " style="color: white;">{{ category }} - not completed</div>								
+					<ul class="widget widget-list inverse-mode">
+						
+						{% for query in queryset %}
+						<li>
+							<div class="widget-list-container bg-theme">
+								<div class="widget-list-media icon ">
+									<i class="{{ query.category.icon }} {{ query.category.color }}"></i>
+								</div>
+								<div class="widget-list-content">
+									<h4 class="widget-title">{{ query.task }}</h4>
 
-            p {
-                font-family: 'Allura';
-                color: rgba(255, 255, 255, .2);
-                margin-bottom: 0;
-                font-size: 60px;
-                margin-top: -30px;
+									<div class="widget-desc hidden-xs">{{ query.date_added }}</div>
+								</div>
+								<div class="widget-list-action">
+									<div class="switcher switcher-success pull-left">
+										<input type="checkbox" name="backup_checkbox" id="backup_checkbox" value="1">
+										<label for="backup_checkbox"></label>
+									</div>
+								</div>
+							</div>
+						</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+				{% endfor %}
+			</div>
+			<!-- END not completed -->
+		</div>
 
-            }
-            }
+		<div class="col-lg-6 col-sm-12">
+			<div class="row">
+				<!-- BEGIN all todos -->
+				<div class="col-12">									
+					<div class="widget-reminder-header bg-inverse " style="color: white;"> All Todos</div>			
+					
+					<ul class="widget widget-list inverse-mode">
+						{% for todo in context.all_todos %}
+						<li>
+							<div class="widget-list-container bg-theme">
+								<div class="widget-list-media icon ">
+									<i class="{{ todo.category.icon }} {{ todo.category.color }}"></i>
+								</div>
+								<div class="widget-list-content">
+									<h4 class="widget-title">{{ todo.task }}</h4>
 
-            .timeline {
+									<div class="widget-desc hidden-xs">{{ todo.date_added }} - {{ todo.completed }}</div>
+								</div>
+								<div class="widget-list-action">
+									<div class="switcher switcher-success pull-left">
+										
+										<input type="checkbox" name="backup_checkbox" id="backup_checkbox" value="1" {% if todo.completed == True %} checked>
+										<label for="backup_checkbox"></label>
+										{% else %}
+										<input type="checkbox" name="backup_checkbox" id="backup_checkbox" value="1">
+										<label for="backup_checkbox"></label>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</li>
+						{% endfor %}
+					</ul>
+							
+				</div>
+				<!-- END all todos -->
+			</div>
+		</div>
+	</div>
 
-            position: relative;
+	<!-- END #content -->
+{% endblock content %}
 
-            &::before {
-                content: '';
-                background: $light-primary;
-                width: 5px;
-                height: 95%;
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            }
+{% block javascripts %}
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="{% static 'assets/plugins/form/bootstrap-wizard/js/bootstrap-wizard.min.js' %}"></script>
+	<script src="{% static 'assets/js/page/form-wizards.demo.min.js' %}"></script>
+	<script src="{% static 'assets/js/apps.min.js' %}"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
 
-            .timeline-item {
-            width: 100%;
-            margin-bottom: 70px;
+	<script>
+		$(document).ready(function() {
+			App.init();
+			FormWizards.init();
+		});
+	</script>
 
-            &:nth-child(even) {
-
-                .timeline-content {
-                float: right;
-                padding: 40px 30px 10px 30px;
-
-                .date {
-                    right: auto;
-                    left: 0;
-                }
-
-                &::after {
-                    content: '';
-                    position: absolute;
-                    border-style: solid;
-                    width: 0;
-                    height: 0;
-                    top: 30px;
-                    left: -15px;
-                    border-width: 10px 15px 10px 0;
-                    border-color: transparent #f5f5f5 transparent transparent;
-                }
-                }
-            }
-
-            &::after {
-                content: '';
-                display: block;
-                clear: both;
-            }
-            }
-
-
-            .timeline-content {
-            position: relative;
-            width: 45%;
-            padding: 10px 30px;
-            border-radius: 4px;
-            background: #f5f5f5;
-            box-shadow: 0 20px 25px -15px rgba(0, 0, 0, .3);
-
-            &::after {
-                content: '';
-                position: absolute;
-                border-style: solid;
-                width: 0;
-                height: 0;
-                top: 30px;
-                right: -15px;
-                border-width: 10px 0 10px 15px;
-                border-color: transparent transparent transparent #f5f5f5;
-            }
-            }
-
-            .timeline-img {
-            width: 30px;
-            height: 30px;
-            background: $primary;
-            border-radius: 50%;
-            position: absolute;
-            left: 50%;
-            margin-top: 25px;
-            margin-left: -15px;
-            }
-
-            a {
-            background: $primary;
-            color: $text;
-            padding: 8px 20px;
-            text-transform: uppercase;
-            font-size: 14px;
-            margin-bottom: 20px;
-            margin-top: 10px;
-            display: inline-block;
-            border-radius: 2px;
-            box-shadow: 0 1px 3px -1px rgba(0, 0, 0, .6);
-
-            &:hover, &:active, &:focus {
-                background: darken($primary, 10%);
-                color: $text;
-                text-decoration: none;
-            }
-
-            }
-
-            .timeline-card {
-            padding: 0!important;
-
-            p {
-                padding: 0 20px;
-            }
-
-            a {
-                margin-left: 20px;
-            }
-            }
-
-            .timeline-item {
-            .timeline-img-header {
-                background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0, .4)), url('https://picsum.photos/1000/800/?random') center center no-repeat;
-                background-size: cover;
-                }
-            }
-
-            .timeline-img-header {
-
-            height: 200px;
-            position: relative;
-            margin-bottom: 20px;
-
-            h2 {
-                color: $text;
-                position: absolute;
-                bottom: 5px;
-                left: 20px;
-            }
-            }
-
-            blockquote {
-            margin-top: 30px;
-            color: $secondary-text;
-            border-left-color: $primary;
-            padding: 0 20px;
-            }
-
-            .date {
-            background: $accent;
-            display: inline-block;
-            color: $text;
-            padding: 10px;
-            position: absolute;
-            top: 0;
-            right: 0;
-            }
-
-            @media screen and (max-width: 768px) {
-
-            .timeline {
-
-                &::before {
-                left: 50px;
-                }
-
-                .timeline-img {
-                left: 50px;
-                }
-
-                .timeline-content {
-                max-width: 100%;
-                width: auto;
-                margin-left: 70px;
-                }
-
-                .timeline-item {
-
-                &:nth-child(even) {
-
-                    .timeline-content {
-                    float: none;
-
-                    }
-                }
-
-                &:nth-child(odd) {
-
-                    .timeline-content {
-                    
-                    &::after {
-                        content: '';
-                        position: absolute;
-                        border-style: solid;
-                        width: 0;
-                        height: 0;
-                        top: 30px;
-                        left: -15px;
-                        border-width: 10px 15px 10px 0;
-                        border-color: transparent #f5f5f5 transparent transparent;
-                    }
-                    }
-
-                }
-                }
-            }
-            
-            }
-        </style>
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-1">
-                <a class="navbar-brand" href="#page-top">Looli</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Header-->
-        <header class="masthead text-center text-white">
-            <div class="masthead-content">
-                <div class="container px-1">
-                    <h1 class="masthead-heading mb-0">I LOVE YOU</h1>
-                    <h2 class="masthead-subheading mb-0">Everyday <br> For the rest of my life</h2>
-                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">more</a>
-                </div>
-            </div>
-            <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>
-        </header>
-        <!-- Content section 1-->
-        <section id="scroll">
-            <div class="container px-1">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'assets/img/01.jpg' %}" alt="..." /></div>
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                            <h2 class="display-4">First day we met</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Content section 2-->
-        <section>
-            <div class="container px-1">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'assets/img/02.jpg' %}" alt="..." /></div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <h2 class="display-4">We fell in Love</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Content section 3-->
-        <section>
-            <div class="container px-1">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'assets/img/03.jpg' %}" alt="..." /></div>
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                            <h2 class="display-4">We got engaged</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id=timeline>
-            <h1>Our Timeline</h1>
-            <p class="leader">All cards must be the same height and width for space calculations on large screens.</p>
-            <div class="demo-card-wrapper">
-                <div class="demo-card demo-card--step1">
-                    <div class="head">
-                        <div class="number-box">
-                            <span>1983</span>
-                        </div>
-                        <h2><span class="small">Salayem</span> Was born</h2>
-                    </div>
-                    <div class="body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta reiciendis deserunt doloribus consequatur, laudantium odio dolorum laboriosam.</p>
-                        <img src="http://placehold.it/1000x500" alt="Graphic">
-                    </div>
-                </div>
-        
-                <div class="demo-card demo-card--step3">
-                    <div class="head">
-                        <div class="number-box">
-                            <span>years past</span>
-                        </div>
-                        <h2><span class="small">after</span> Years went by</h2>
-                    </div>
-                    <div class="body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta reiciendis deserunt doloribus consequatur, laudantium odio dolorum laboriosam.</p>
-                        <img src="http://placehold.it/1000x500" alt="Graphic">
-                    </div>
-                </div>
-        
-                <div class="demo-card demo-card--step3">
-                    <div class="head">
-                        <div class="number-box">
-                            <span>03</span>
-                        </div>
-                        <h2><span class="small">Subtitle</span> Adaptation</h2>
-                    </div>
-                    <div class="body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta reiciendis deserunt doloribus consequatur, laudantium odio dolorum laboriosam.</p>
-                        <img src="http://placehold.it/1000x500" alt="Graphic">
-                    </div>
-                </div>
-        
-                <div class="demo-card demo-card--step1">
-                    <div class="head">
-                        <div class="number-box">
-                            <span>04</span>
-                        </div>
-                        <h2><span class="small">Subtitle</span> Consistency</h2>
-                    </div>
-                    <div class="body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta reiciendis deserunt doloribus consequatur, laudantium odio dolorum laboriosam.</p>
-                        <img src="http://placehold.it/1000x500" alt="Graphic">
-                    </div>
-                </div>
-        
-                <div class="demo-card demo-card--step9">
-                    <div class="head">
-                        <div class="number-box">
-                            <span>05</span>
-                        </div>
-                        <h2><span class="small">Subtitle</span> Conversion</h2>
-                    </div>
-                    <div class="body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta reiciendis deserunt doloribus consequatur, laudantium odio dolorum laboriosam.</p>
-                        <img src="http://placehold.it/1000x500" alt="Graphic">
-                    </div>
-                </div>
-            
-            </div>
-        </section>
-
-
-
-        <section class="timeline">
-            <div class="container">
-              <div class="timeline-item">
-                <div class="timeline-img"></div>
-          
-                <div class="timeline-content js--fadeInLeft">
-                  <h2>Title</h2>
-                  <div class="date">1 MAY 2016</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
-                  <a class="bnt-more" href="javascript:void(0)">More</a>
-                </div>
-              </div> 
-          
-              <div class="timeline-item">
-          
-                <div class="timeline-img"></div>
-          
-                <div class="timeline-content timeline-card js--fadeInRight">
-                  <div class="timeline-img-header">
-                    <h2>Card Title</h2>
-                  </div>
-                  <div class="date">25 MAY 2016</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
-                  <a class="bnt-more" href="javascript:void(0)">More</a>
-                </div>
-          
-              </div>   
-          
-              <div class="timeline-item">
-          
-                <div class="timeline-img"></div>
-          
-                <div class="timeline-content js--fadeInLeft">
-                  <div class="date">3 JUN 2016</div>
-                  <h2>Quote</h2>
-                  <blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo debitis omnis dolor iste fugit totam quasi inventore!</blockquote>
-                </div>
-              </div>   
-          
-              <div class="timeline-item">
-          
-                <div class="timeline-img"></div>
-          
-                <div class="timeline-content js--fadeInRight">
-                  <h2>Title</h2>
-                  <div class="date">22 JUN 2016</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
-                  <a class="bnt-more" href="javascript:void(0)">More</a>
-                </div>
-              </div>   
-          
-              <div class="timeline-item">
-          
-                <div class="timeline-img"></div>
-          
-                <div class="timeline-content timeline-card js--fadeInLeft">
-                  <div class="timeline-img-header">
-                    <h2>Card Title</h2>
-                  </div>
-                  <div class="date">10 JULY 2016</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
-                  <a class="bnt-more" href="javascript:void(0)">More</a>
-                </div>
-              </div>   
-          
-              <div class="timeline-item">
-          
-                <div class="timeline-img"></div>
-          
-                <div class="timeline-content timeline-card js--fadeInRight">
-                  <div class="timeline-img-header">
-                    <h2>Card Title</h2>
-                  </div>
-                  <div class="date">30 JULY 2016</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
-                  <a class="bnt-more" href="javascript:void(0)">More</a>
-                </div>
-              </div>  
-          
-              <div class="timeline-item">
-          
-                <div class="timeline-img"></div>
-          
-                <div class="timeline-content js--fadeInLeft">
-                  <div class="date">5 AUG 2016</div>
-                  <h2>Quote</h2>
-                  <blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo debitis omnis dolor iste fugit totam quasi inventore!</blockquote>
-                </div>
-              </div>   
-          
-              <div class="timeline-item">
-          
-                <div class="timeline-img"></div>
-          
-                <div class="timeline-content timeline-card js--fadeInRight">
-                  <div class="timeline-img-header">
-                    <h2>Card Title</h2>
-                  </div>
-                  <div class="date">19 AUG 2016</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
-                  <a class="bnt-more" href="javascript:void(0)">More</a>
-                </div>
-              </div>  
-          
-              <div class="timeline-item">
-          
-                <div class="timeline-img"></div>
-          
-                <div class="timeline-content js--fadeInLeft">
-                  <div class="date">1 SEP 2016</div>
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
-                  <a class="bnt-more" href="javascript:void(0)">More</a>
-                </div>
-              </div>   
-          
-          
-          
-            </div>
-          </section>
-
-
-
-        <!-- Footer-->
-        <footer class="py-5 bg-black">
-            <div class="container px-1"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-
-        <script>
-            $(function(){
-
-            window.sr = ScrollReveal();
-
-            if ($(window).width() < 768) {
-
-            if ($('.timeline-content').hasClass('js--fadeInLeft')) {
-                $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
-            }
-
-            sr.reveal('.js--fadeInRight', {
-                origin: 'right',
-                distance: '300px',
-                easing: 'ease-in-out',
-                duration: 800,
-            });
-
-            } else {
-            
-            sr.reveal('.js--fadeInLeft', {
-                origin: 'left',
-                distance: '300px',
-                easing: 'ease-in-out',
-                duration: 800,
-            });
-
-            sr.reveal('.js--fadeInRight', {
-                origin: 'right',
-                distance: '300px',
-                easing: 'ease-in-out',
-                duration: 800,
-            });
-
-            }
-
-            sr.reveal('.js--fadeInLeft', {
-                origin: 'left',
-                distance: '300px',
-                easing: 'ease-in-out',
-                duration: 800,
-            });
-
-            sr.reveal('.js--fadeInRight', {
-                origin: 'right',
-                distance: '300px',
-                easing: 'ease-in-out',
-                duration: 800,
-            });
-
-
-            });
-        </script>
-    </body>
-</html>
+{% endblock javascripts %}
